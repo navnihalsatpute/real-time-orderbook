@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Real-Time Order Book Visualizer
 
-## Getting Started
+LIVE LINK: https://real-time-orderbook.vercel.app/
 
-First, run the development server:
+A professional, responsive web application that streams and visualizes real-time cryptocurrency order book and trade data from the Binance public WebSocket API.  
+Built with Next.js, React, and Tailwind CSS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Features
+
+- **Live order book**: Continuously updates bids, asks, spread, and cumulative totals from Binance.
+- **Recent trades**: Shows the latest 50 trades, color-coded (green for buys, red for sells) with animated highlighting for new trades.
+- **Responsive design**: Fully works on desktop, tablets, and mobile browsers.
+- **Professional UI**: Clean, card-based layout; scrollable tables; visually grouped sections.
+- **Horizontal and vertical scroll**: Ensures all columns are accessible regardless of screen size.
+
+---
+
+## Installation
+
+Clone the repository and install dependencies:
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+git clone https://github.com/navnihalsatpute/real-time-orderbook.git
+cd real-time-orderbook
+npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To run the development server:
+```
 
-## Learn More
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The project is designed for **instant deploy on Vercel** 
 
-## Deploy on Vercel
+- Any push to the GitHub repository will trigger an auto deploy if connected.
+- Public site link and preview deployments available after every commit.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design Decisions & Trade-offs
+
+- **WebSocket/State**: I used a custom React hook for WebSocket handling and state aggregation. Rather than Zustand or Redux, I used local state because only this hook requires live state, and React’s built-in hooks offer simpler and more efficient updates for this use-case.
+- **UI Library**: Instead of heavy UI libraries, Tailwind CSS was chosen for speed, customizability, and cleaner CSS logic for responsive layouts.
+- **Responsiveness**: I used `flex-col md:flex-row` containers and individual `overflow-x-auto` for each table to handle overflow and ensure no data is ever hidden on any device.
+- **Performance**: The order book tables and recent trades are limited to the 20 and 50 latest entries respectively to minimize DOM update cost, while still capturing the full liveliness of the market.
+- **Accessibility/Style**: Fonts, contrast, and card spacing closely follow modern financial dashboard norms for readability and quick data comparison.
+
+---
